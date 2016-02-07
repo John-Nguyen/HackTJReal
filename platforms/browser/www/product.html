@@ -50,12 +50,9 @@
             <div id = "cart" class ="content">
             </div>
             <div class = "footer" id="noborder">
-                <button type="button" class="btn btn-success btn-block">Checkout</button>
+                <button type="button" class="btn btn-success btn-block" onclick="checkout();">Checkout</button>
                <button type="button" class="btn btn-primary btn-block" onclick="assign();">Continue Shopping</button>
             </div>
-                  
-        <a href="myInfo.html" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> <span class="network-name"></span></a> 
-
             </div>
         </div>
       
@@ -124,6 +121,11 @@
             function assign(){
                window.location.assign("index.html"); 
             }
+
+            function checkout(){
+               window.location.assign("myInfo.html"); 
+            }
+
 
             
             
