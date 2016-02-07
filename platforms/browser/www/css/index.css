@@ -21,20 +21,6 @@
 }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
@@ -90,14 +76,7 @@ h1 {
 .big-icon {
     font-size: 32px;
 }
-.btn-xlarge {
-    padding: 18px 28px;
-    font-size: 22px; /*change this to your desired size*/
-    line-height: normal;
-    -webkit-border-radius: 8px;
-       -moz-border-radius: 8px;
-            border-radius: 8px;
-}
+
 
 .header{
     position: fixed;
@@ -113,9 +92,9 @@ h1 {
     width: 100%; 
     background-image: none;
     border-width: 2px;
-    border-top-width:2px;
-    border-top-color:gray;
-    border-top-style: solid;
+    border-bottom-width:2px;
+    border-bottom-color:gray;
+    border-bottom-style: solid;
     background-repeat: repeat;
     background-attachment: scroll;
     background-position: 0% 0%;
@@ -141,14 +120,14 @@ h1 {
     background-color:white;
     align-content: center;
     font-style:bold;
-    height:100px; 
+    height:80px; 
 >>>>>>> Stashed changes
     width: 100%; 
     background-image: none;
     border-width: 2px;
-    border-bottom-width:2px;
-    border-bottom-color:gray;
-    border-bottom-style: solid;
+    border-top-width:2px;
+    border-top-color:gray;
+    border-top-style: solid;
     background-repeat: repeat;
     background-attachment: scroll;
     background-position: 0% 0%;
@@ -191,4 +170,12 @@ h1 {
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
+}
+
+#left-icon{
+    float: left;
+}
+
+#right-icon{
+    float: right;
 }
