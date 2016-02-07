@@ -1,0 +1,156 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="Bootstrap/css/landing-page.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="Bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/myInfo.css" />
+        <title>My Info</title>
+        <script data-main="lib/capital_one" src="lib/require-jquery.js"></script>
+    </head>
+    <body>
+        <div class="app">
+            <div class = "header" >
+                <a href="index.html" class="btn btn-default btn-lg"><i class="fa fa-fast-backward fa-fw"></i> <span class="network-name">Back</span></a>
+            </div>
+            <div class = "content" align = "center">
+                <h1>My Information</h1>
+                <div id="deviceready" >
+                    <p class="event listening">Ready</p>
+                    <p class="event received">Ready</p>
+                </div>
+                <h2 id = "userName">Welcome </h2>
+                <h2 id = "userBalance">Balance:</h2>
+                <p id = "userAccount"></p>
+                
+                <div class="btn-group">
+                    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account Type<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href = "#">Checking Account</a></li>
+                        <li><a href = "#">Savings Account</a></li>
+                    </ul>
+                </div>
+                <button class = "btn btn-default" onClick = makePurchase()>View Purchase History</button>
+            </div>
+            <div id = "pastPurchase"></div>
+            <div class = "footer">
+                   
+            </div>
+        </div>
+      
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+        <!-- jQuery -->
+        <script src="Bootstrap/js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="Bootstrap/js/bootstrap.min.js"></script>
+        <script>
+            $(function(){
+                require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase], function (account) {
+                    var apikey = 'd17aecf060203fad3bb3416d6cf34f93';
+                    accountDemo(apikey, account);
+                });
+            });
+//            var myKey = "d17aecf060203fad3bb3416d6cf34f93";
+//            var userData = [{"_id":"56241a14de4bf40b17112dfc","customer_id":"56241a13de4bf40b171121e5","nickname":"Katina's Account","type":"Checking","rewards":28275,"balance":40726}];
+//            
+//            var sampleMerchant = [{"_id": "56241a13de4bf40b17112333",
+//                        "address": {
+//                        "street_number": "5901",
+//                        "street_name": "Lafayette St.",
+//                        "city": "Brooklyn",
+//                        "state": "NY",
+//                        "zip": "07009"
+//                        },
+//                        "geocode": {
+//                            "lat": 33,
+//                            "lng": -1
+//                        },
+//                                   "name": "Best Productions",
+//                                    "category": "Entertainment"
+//  }];
+//            
+//            var userId = userData[0]['_id'];
+//            var userName = userData[0]['nickname'];
+//            var userBalance = userData[0]['balance'];
+//            document.getElementById('userName').innerHTML += ", " + userData[0]['nickname'];
+//            document.getElementById('userBalance').innerHTML += userData[0]['balance'];
+//            
+//            var purchaseURL = 
+//                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
+//            
+//            
+//            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;//"http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey;
+//            //doHTTP(purchaseURL, 'pastPurchase');
+//            
+//            
+//            function doHTTP(theURL, callback){
+//                var xhr = new XMLHttpRequest();
+//                xhr.open("GET", theURL, true);
+//                xhr.onreadystatechange = function (e) {
+//                if (xhr.readyState === 4) {
+//                    if (xhr.status === 200) {
+//                        console.log(xhr.responseText);
+//                        callback(xhr.responseText);
+//                    } 
+//                    else {
+//                        console.error(xhr.statusText);
+//                    
+//                    }
+//                }
+//            };
+//            xhr.onerror = function (e) {
+//            console.error(xhr.statusText);
+//            };
+//            xhr.send(null); 
+//         }
+//            
+//            
+//        function makePurchase(){
+//            var purchaseURL = 
+//                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
+//            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;
+//            
+//            doHTTP(purchaseURL, function(responseText){
+//                responseText = JSON.parse(responseText);
+//                
+//                for(i = 0; i < responseText.length; i++){
+//                    
+//                   document.getElementById('pastPurchase').innerHTML += "Amount:" + '&nbsp;'+ responseText[i]['amount'] + '<br>';
+//            }
+//            //doHTTP("http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey, 'pastPurchase');
+//            
+//        });
+//        }
+//                   
+            
+//sample body for purchase request
+                    
+//                    {
+//                  "merchant_id": "Target",
+//                  "medium": "balance",
+//                  "purchase_date": "2016-02-07",
+//                  "amount": 25,
+//                  "status": "pending",
+//                  "description": "string"
+//}
+    
+
+</script>
+    </body>
+</html>

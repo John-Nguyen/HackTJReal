@@ -27,7 +27,8 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        
         <!-- Custom CSS -->
         <link href="Bootstrap/css/landing-page.css" rel="stylesheet">
 
@@ -39,37 +40,67 @@
     </head>
     <body>
         <div class="app">
-            
             <div id="deviceready" class = "header">
-                <a href="checkin.html" class="btn btn-default btn"><i class="fa fa-arrow-right fa-fw"></i> <span class="network-name">Check-In</span></a>
+                <a href="#" onclick="capturePhoto();"class="big-icon" align = "left"><i class="glyphicon glyphicon-camera"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="checkin.html" class="big-icon" align = "right"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+                
             </div>
             <div class ="content">
                 <div class = "row">
-                    <a href="#" class="btn btn-default btn-lg">1</a>
-                    <a href="#" class="btn btn-default btn-lg">2</a>
-                    <a href="#" class="btn btn-default btn-lg" onclick="scan()">3</a>
+                    <h1 id="update" value =""></h1> 
                 </div>
                 <br>
                 <div class = "row">
-                    <a href="#" class="btn btn-default btn-lg">4</a>
-                    <a href="#" class="btn btn-default btn-lg">5</a>
-                    <a href="#" class="btn btn-default btn-lg">6</a>
+                    <input type ='button'onclick="updateSerial(this)" value="1" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="2" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="3" class="btn btn-default btn-lg"> </input>
                 </div>
                 <br>
                 <div class = "row">
-                    <a href="#" class="btn btn-default btn-lg">7</a>
-                    <a href="#" class="btn btn-default btn-lg">8</a>
-                    <a href="#" class="btn btn-default btn-lg">9</a>
+                    <input type ='button'onclick="updateSerial(this)" value="4" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="5" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="6" class="btn btn-default btn-lg"> </input>
                 </div>
                 <br>
                 <div class = "row">
-                    <a href="#" class="btn btn-default btn-lg">_</a>
-                    <a href="#" class="btn btn-default btn-lg">0</a>
-                    <a href="#" class="btn btn-default btn-lg">B</a>
+                    <input type ='button'onclick="updateSerial(this)" value="7" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="8" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="9" class="btn btn-default btn-lg"> </input>
+                </div>
+                <br>
+                <div class = "row">
+                    <input type ='button'onclick="updateSerial(this)" value="X" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="0" class="btn btn-default btn-lg"> </input>
+                    <input type ='button'onclick="updateSerial(this)" value="B" class="btn btn-default btn-lg"> </input>
+                </div>
+                <br>
+                <br>
+                <div class = "row">
+                    <input type ='button' onclick = "submitSerial()" value = "Submit" class="btn btn-default btn-lg"></input>               
                 </div>
             </div>
             <div class = "footer">
-                    <a href="checkin.html" class="btn btn-default"><i class="fa fa-arrow-right fa-fw"></i> <span class="network-name">Check-In</span></a>
+
+               <a href="checkin.html" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i> <span class="network-name">Check-In</span></a>      
+                <a href="myInfo.html" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> <span class="network-name">Account</span></a>
+
+
+
+               <div class="btn-group dropup">
+                   
+  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <input type="text" id="selected_location" style="color:black" >&nbsp;&nbsp;<i class="glyphicon glyphicon-map-marker"></i> 
+  </button>
+        <ul class="dropdown-menu" id = "loclist">
+                        <li><a href = "#" name = "place">HackTJ Store</a></li>
+                        <li><a href = "#" name = "place">Target</a></li>
+                        <li><a href = "#" name = "place">Safeway</a></li>
+                        <li><a href = "#" name = "place">Giant</a></li>
+                    </ul>
+            </div>
+                  
+<a href="myInfo.html" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> <span class="network-name"></span></a>
+
             </div>
         </div>
       
@@ -77,6 +108,61 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+            var finalSerial = "";
+            function updateSerial(button) {
+                if(button.value == "X") {
+                    document.getElementById("update").innerHTML = "";
+                    finalSerial = "";
+                }
+                else if(button.value == "B") {
+                    var curVal = document.getElementById("update").innerHTML;
+                    document.getElementById("update").innerHTML = curVal.substring(0, curVal.length - 1);
+                    finalSerial = curVal.substring(0, curVal.length - 1);
+                }
+                else {
+                    var curVal = document.getElementById("update").innerHTML;
+                    document.getElementById("update").innerHTML = curVal + button.value;
+                    finalSerial = curVal + button.value;
+                }
+
+            }
+
+            function submitSerial() {
+                var serial = document.getElementById("update").innerHTML;
+                if (serial == "") {
+                    return;
+                }
+                else {
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById("update").innerHTML = "success";
+                        }
+                    }
+                    xmlhttp.open("GET", "https://www.tjhsst.edu/~2016jnguyen2/saveSerial.php?q="+serial, true);
+                    xmlhttp.send();
+                }
+            }
+
+            function capturePhoto(){
+                navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60});
+            }
+            function uploadPhoto(data){
+            // this is where you would send the image file to server
+             
+            //output image to screen
+                //console.log("wtf");
+              window.location.assign("http://www.w3schools.com");
+            }
+
+            
+            
+        $("#loclist li a").click(function(){
+
+           $('#selected_location').val($(this).html());
+        });
+            
+
         </script>
         <!-- jQuery -->
         <script src="Bootstrap/js/jquery.js"></script>
