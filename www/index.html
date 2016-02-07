@@ -42,7 +42,7 @@
         <div class="app">
             <div id="deviceready" class = "header">
                 <a href="#" onclick="capturePhoto();"class="big-icon" align = "left"><i class="glyphicon glyphicon-camera"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="checkin.html" class="big-icon" align = "right"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+                <a href="checkin.html" onclick = "displayCart();"class="big-icon" align = "right"><i class="glyphicon glyphicon-shopping-cart"></i></a>
                 
             </div>
             <div class ="content">
@@ -142,6 +142,9 @@
 
             function capturePhoto(){
                 navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60});
+            }
+            function displayCart(){
+                
             }
             function uploadPhoto(data){
             // this is where you would send the image file to server
