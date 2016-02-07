@@ -82,7 +82,7 @@ define('account', function (require) {
 		**/
 		getAllByCustomerId: function(customerId) {
 				var accounts;
-			var request = $.ajax({ 
+			    var request = $.ajax({ 
 				url: this.urlWithCustomerEntity()+customerId+'/accounts',
 				data: 'key='+this.apiKey(),
 				async: false,

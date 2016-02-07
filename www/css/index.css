@@ -107,12 +107,13 @@ h1 {
     right: 0;
     bottom: ;
     left: 0;
-<<<<<<< Updated upstream
+
     padding: 10px;
     color: white;
     background-color:white;
     align-content: center;
     font-style:bold;
+<<<<<<< Updated upstream
 =======
     margin-bottom: :100px 150px 100px 80px;
     padding: 1rem;
@@ -121,6 +122,10 @@ h1 {
     align-content: center;
     font-style:bold;
     height:80px; 
+>>>>>>> Stashed changes
+=======
+
+
 >>>>>>> Stashed changes
     width: 100%; 
     background-image: none;
@@ -156,7 +161,7 @@ h1 {
 }
 #update{
     
-    height:20px;
+    height:15px;
 }
 @keyframes fade {
     from { opacity: 1.0; }
