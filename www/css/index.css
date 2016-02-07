@@ -78,10 +78,11 @@ h1 {
 }
 .content{
     align-content: center;
-    margin: 100px;
+    margin-top: 175px;
     width: 100%;
     position: fixed;
-    left: -75pt;
+    right: 0;
+    left: 0;
 
 
 
@@ -92,6 +93,7 @@ h1 {
     top: 0;
     left: 0;
     padding: 10px;
+    margin-top: 20px;
     color: white;
     background-color:white;
     align-content: center;
