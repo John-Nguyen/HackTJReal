@@ -27,7 +27,8 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        
         <!-- Custom CSS -->
         <link href="Bootstrap/css/landing-page.css" rel="stylesheet">
 
@@ -85,7 +86,7 @@
                <div class="btn-group dropup">
                    
   <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- <input type="text" id="selected_location" style="color:black">&nbsp;&nbsp;<i class="
+ <input type="text" id="selected_location" style="color:black" >&nbsp;&nbsp;<i class="
 glyphicon glyphicon-map-marker"></i> 
   </button>
         <ul class="dropdown-menu" id = "loclist">
@@ -126,6 +127,7 @@ glyphicon glyphicon-map-marker"></i>
 
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             function submitSerial() {
                 var serial = document.getElementById("update").innerHTML;
@@ -152,8 +154,13 @@ glyphicon glyphicon-map-marker"></i>
             
             
         $("#loclist li a").click(function(){
+=======
+             $("#loclist li a").click(function(){
+>>>>>>> origin/master
            $('#selected_location').val($(this).html());
         });
+            
+
         
 >>>>>>> origin/master
         </script>
