@@ -83,18 +83,18 @@
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 //document.getElementById("price").innerHTML = xmlhttp.responseText;
-                var price = xmlhttp.responseText; //Price from php file
-                alert(price);
+                //var price = xmlhttp.responseText; //Price from php file
+                var price = 8.99;
             }
             else{
                         console.error(xmlhttp.statusText);
                     
-            }
+            }   
         }
         xmlhttp.open("GET", "https://www.tjhsst.edu/~2016choang/Agency/priceCalc.php", true);
         xmlhttp.send();
         
-        
+        var price = 8.99;
         $(function(){
         require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], 
             function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase) {
@@ -149,7 +149,15 @@
 //			var samplePurchase = '{ "merchant_id": "55e94a6cf8d8770528e6196d", "medium": "balance", "purchase_date": "02/04/16", "amount": 20, "status": "pending", "description": "string" }';
 //			console.log("[purchase - create purchase] Response: " + purchaseAccount.createPurchase(accID, samplePurchase));
          allAccounts[selectedUserIndex].balance -= price;
-          document.getElementById('pastPurchase').innerHTML += "Price: " + price + " Vendor: HackTJ" + "<br>";
+        var currentdate = new Date(); 
+        var datetime = "Date: " + currentdate.getMonth() + "/"
+                + (currentdate.getDate()+1)  + "/" 
+                + currentdate.getFullYear() + "  "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+        
+          document.getElementById('pastPurchase').innerHTML +=  datetime + " &nbsp;&nbsp; Price: " + price + " &nbsp;&nbsp;Vendor: HackTJ" + "<br>";
           document.getElementById('userBalance').innerHTML = "Balance &nbsp" +                                                                               (parseFloat(allAccounts[selectedUserIndex].balance).toFixed(2));
         //Past Purchases
 			//console.log("[purchase - get all purchases] Response: " + purchaseAccount.getAll(accID));
