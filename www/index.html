@@ -71,16 +71,13 @@
                 <br>
                 <br>
                 <div class = "row">
-                    <h1 id="update" value =""></h1>                
+                    <h1 id="update" value =""></h1> 
+                    <input type ='button' value = "Submit" class="btn btn-default btn-lg"></input>               
                 </div>
             </div>
             <div class = "footer">
-
-
                <a href="checkin.html" class="btn btn-default"><i class="glyphicon glyphicon-map-marker"></i> <span class="network-name">Check-In</span></a>      
 <a href="myInfo.html" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> <span class="network-name">Account</span></a>
-
-
             </div>
         </div>
       
@@ -105,6 +102,28 @@
                     finalSerial = curVal + button.value;
                 }
 
+            }
+
+            function submitSerial() {
+                var serial = document.getElementById("update").innerHTML;
+                if (serial == "") {
+                    return;
+                }
+                else {
+                    if(window.XMLHttpRequest) {
+
+                    }
+                    else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            document.getElementById("update").innerHTML = xmlhttp.responseText;
+                        }
+                    };
+                    xmlhttp.open("POST", "saveSerial.php?q="+serial, true);
+                    xmlhttp.send();
+                }
             }
         </script>
         <!-- jQuery -->
