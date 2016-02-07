@@ -76,8 +76,17 @@ h1 {
     padding:0px;
     text-align:center;
 }
-.header{
+.content{
+    align-content: center;
+    margin: 100px;
+    width: 100%;
+    position: fixed;
+    left: -75pt;
 
+
+
+}
+.header{
     position: fixed;
     right: 0;
     top: 0;
