@@ -89,15 +89,17 @@
             
             
             var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;//"http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey;
-            doHTTP(purchaseURL, 'pastPurchase');
-            function doHTTP(theURL, destinationId){
+            //doHTTP(purchaseURL, 'pastPurchase');
+            
+            
+            function doHTTP(theURL, callback){
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", theURL, true);
                 xhr.onreadystatechange = function (e) {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         console.log(xhr.responseText);
-                        document.getElementById(destinationId).innerHTML += xhr.responseText;
+                        callback(xhr.responseText);
                     } 
                     else {
                         console.error(xhr.statusText);
@@ -111,14 +113,24 @@
             xhr.send(null); 
          }
             
+            
         function makePurchase(){
             var purchaseURL = 
                 "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
             var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;
-            doHTTP(purchaseURL, 'pastPurchase');
+            
+            doHTTP(purchaseURL, function(responseText){
+                responseText = JSON.parse(responseText);
+                
+                for(i = 0; i < responseText.length; i++){
+                    
+                   document.getElementById('pastPurchase').innerHTML += "Amount:" + '&nbsp;'+ responseText[i]['amount'] + '<br>';
+            }
             //doHTTP("http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey, 'pastPurchase');
             
+        });
         }
+                   
             
 //sample body for purchase request
                     
