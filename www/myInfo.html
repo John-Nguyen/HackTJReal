@@ -68,13 +68,14 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script>
-            
+        var selectedUser;   
+        var selectedUserIndex;
     $(function(){
     require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], 
             function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase) {
                 var apikey =   'd17aecf060203fad3bb3416d6cf34f93';
                 accountDemo(apikey, account);
-                showFakePurchases(apikey);
+                //showFakePurchases(apikey);
                 
         });
     });
@@ -87,28 +88,35 @@
 			var newAccount = "{\"nickname\":\"Mr. Stanislaus's Account\"}";
 			var sampleAccount = "{\"balance\":50,\"nickname\":\"Lola Account\",\"rewards\":2,\"type\":\"Checking\"}";
         
+        var allAccounts = custAccount.getAllAccounts();
+        
           for(x = 0; x < custAccount.getAllAccounts().length; x++){      
-			 console.log("[Account - Get All Accounts] : Sample Account Nickname: (" + custAccount.getAllAccounts()[x].nickname + ")" + x);
-              var list = document.createElement('li');
+             
+			 console.log("[Account - Get All Accounts] : Sample Account Nickname: (" + allAccounts[x].nickname + ")" + x);
+             var list = document.createElement('li');
               var name = document.createTextNode(""+custAccount.getAllAccounts()[x].nickname);
-              
               var link =  document.createElement('a');
               link.appendChild(name);
                 link.setAttribute("href",'#');
+              link.setAttribute("name", x);
               list.appendChild(link);
               document.getElementById('users').appendChild(list);
               
           }
          $("#users li a").click(function(){
-
-           $('#selected_user').html($(this).html());
+            selectedUser = $(this).html();
+           $('#selected_user').html(selectedUser);
+             selectedUserIndex = parseInt($(this).attr("name"));
+             document.getElementById('userBalance').innerHTML = "Balance &nbsp" +                                                                               (parseFloat(allAccounts[selectedUserIndex].balance).toFixed(2));
         });
-//			//console.log("[Account - Get All By Type] : " + custAccount.getAllByType('Checking')[0].type);
-//			console.log("[Account - Get Customer (Prior Update)] : " + ((custAccount.getAllByCustomerId(custID))[0]).nickname);
-			console.log("[Account - Updating Stanislaus's Account] - response code: " + custAccount.updateAccount(accID, newAccount));
-			console.log("[Account - Get Customer (Post Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
-			console.log("[Account - Create Sample for Miss. Stanislaus's Account]:  response" + custAccount.createAccount(custID,        sampleAccount));
-			console.log("[Account - Get One] : Account Balance $" + parseFloat(custAccount.getAccountById(accID).balance).toFixed(2));
+////			//console.log("[Account - Get All By Type] : " + custAccount.getAllByType('Checking')[0].type);
+////			console.log("[Account - Get Customer (Prior Update)] : " + ((custAccount.getAllByCustomerId(custID))[0]).nickname);
+//			console.log("[Account - Updating Stanislaus's Account] - response code: " + custAccount.updateAccount(accID, newAccount));
+//			console.log("[Account - Get Customer (Post Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
+//			console.log("[Account - Create Sample for Miss. Stanislaus's Account]:  response" + custAccount.createAccount(custID,        sampleAccount));
+        
+        
+			//console.log("[Account - Get One] : Account Balance $" + parseFloat(custAccount.getAccountById(accID).balance).toFixed(2));
 			
 		} 
     
@@ -135,7 +143,6 @@
                     document.getElementById('pastPurchase').innerHTML += "<tr><td> &nbsp; &nbsp; Merchant:</td>" + '&nbsp;<td>'+                               responseText[i]['merchant'] + '</td></tr>';
                     
                     document.getElementById('pastPurchase').innerHTML +='<br>';
-                    
                 }
                 document.getElementById('pastPurchase').innerHTML += "</table>";
             
