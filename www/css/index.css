@@ -175,7 +175,10 @@ h1 {
     background-color:#4B946A;
     display:none;
 }
-
+#update{
+    
+    height:20px;
+}
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }

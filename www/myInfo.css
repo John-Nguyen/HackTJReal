@@ -132,6 +132,13 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
+
+.pastPurchase{
+    align-content: center;
+    margin:auto;
+    margin-left: 50px;
+    color:blue;
+}
  
 .blink {
     animation:fade 3000ms infinite;

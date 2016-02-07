@@ -23,15 +23,11 @@
                 <a href="index.html" class="btn btn-default btn-lg"><i class="fa fa-fast-backward fa-fw"></i> <span class="network-name">Back</span></a>
             </div>
             <div class = "content" align = "center">
-                <h1>My Information</h1>
-                <div id="deviceready" >
-                    <p class="event listening">Ready</p>
-                    <p class="event received">Ready</p>
-                </div>
-                <h2 id = "userName">Welcome </h2>
+                <h2 id = "userName"></h2>
                 <h2 id = "userBalance">Balance:</h2>
                 <p id = "userAccount"></p>
-                
+                <button class = "btn btn-default" onClick = makePurchase()>View Purchase History</button>
+                <br>
                 <div class="btn-group">
                     <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Account Type<span class="caret"></span>
@@ -41,7 +37,8 @@
                         <li><a href = "#">Savings Account</a></li>
                     </ul>
                 </div>
-                <button class = "btn btn-default" onClick = makePurchase()>View Purchase History</button>
+                 <br>
+                
             </div>
             <div id = "pastPurchase"></div>
             <div class = "footer">
@@ -60,87 +57,87 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script>
-            $(function(){
-                require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase], function (account) {
-                    var apikey = 'd17aecf060203fad3bb3416d6cf34f93';
-                    accountDemo(apikey, account);
-                });
-            });
-//            var myKey = "d17aecf060203fad3bb3416d6cf34f93";
-//            var userData = [{"_id":"56241a14de4bf40b17112dfc","customer_id":"56241a13de4bf40b171121e5","nickname":"Katina's Account","type":"Checking","rewards":28275,"balance":40726}];
-//            
-//            var sampleMerchant = [{"_id": "56241a13de4bf40b17112333",
-//                        "address": {
-//                        "street_number": "5901",
-//                        "street_name": "Lafayette St.",
-//                        "city": "Brooklyn",
-//                        "state": "NY",
-//                        "zip": "07009"
-//                        },
-//                        "geocode": {
-//                            "lat": 33,
-//                            "lng": -1
-//                        },
-//                                   "name": "Best Productions",
-//                                    "category": "Entertainment"
-//  }];
-//            
-//            var userId = userData[0]['_id'];
-//            var userName = userData[0]['nickname'];
-//            var userBalance = userData[0]['balance'];
-//            document.getElementById('userName').innerHTML += ", " + userData[0]['nickname'];
-//            document.getElementById('userBalance').innerHTML += userData[0]['balance'];
-//            
-//            var purchaseURL = 
-//                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
-//            
-//            
-//            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;//"http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey;
-//            //doHTTP(purchaseURL, 'pastPurchase');
-//            
-//            
-//            function doHTTP(theURL, callback){
-//                var xhr = new XMLHttpRequest();
-//                xhr.open("GET", theURL, true);
-//                xhr.onreadystatechange = function (e) {
-//                if (xhr.readyState === 4) {
-//                    if (xhr.status === 200) {
-//                        console.log(xhr.responseText);
-//                        callback(xhr.responseText);
-//                    } 
-//                    else {
-//                        console.error(xhr.statusText);
-//                    
-//                    }
-//                }
-//            };
-//            xhr.onerror = function (e) {
-//            console.error(xhr.statusText);
-//            };
-//            xhr.send(null); 
-//         }
-//            
-//            
-//        function makePurchase(){
-//            var purchaseURL = 
-//                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
-//            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;
-//            
-//            doHTTP(purchaseURL, function(responseText){
-//                responseText = JSON.parse(responseText);
-//                
-//                for(i = 0; i < responseText.length; i++){
-//                    
-//                   document.getElementById('pastPurchase').innerHTML += "Amount:" + '&nbsp;'+ responseText[i]['amount'] + '<br>';
-//            }
-//            //doHTTP("http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey, 'pastPurchase');
-//            
-//        });
-//        }
-//                   
+//            $(function(){
+//                require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase], function (account) {
+//                    var apikey = 'd17aecf060203fad3bb3416d6cf34f93';
+//                    accountDemo(apikey, account);
+//                });
+//            });
+            var myKey = "d17aecf060203fad3bb3416d6cf34f93";
+            var userData = [{"_id":"56241a14de4bf40b17112dfc","customer_id":"56241a13de4bf40b171121e5","nickname":"Katina's Account","type":"Checking","rewards":28275,"balance":40726}];
             
-//sample body for purchase request
+            var sampleMerchant = [{"_id": "56241a13de4bf40b17112333",
+                        "address": {
+                        "street_number": "5901",
+                        "street_name": "Lafayette St.",
+                        "city": "Brooklyn",
+                        "state": "NY",
+                        "zip": "07009"
+                        },
+                        "geocode": {
+                            "lat": 33,
+                            "lng": -1
+                        },
+                                   "name": "Best Productions",
+                                    "category": "Entertainment"
+  }];
+            
+            var userId = userData[0]['_id'];
+            var userName = userData[0]['nickname'];
+            var userBalance = userData[0]['balance'];
+            document.getElementById('userName').innerHTML +=  userData[0]['nickname'];
+            document.getElementById('userBalance').innerHTML += userData[0]['balance'];
+            
+            var purchaseURL = 
+                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
+            
+            
+            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;//"http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey;
+            //doHTTP(purchaseURL, 'pastPurchase');
+            
+            
+            function doHTTP(theURL, callback){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", theURL, true);
+                xhr.onreadystatechange = function (e) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        callback(xhr.responseText);
+                    } 
+                    else {
+                        console.error(xhr.statusText);
                     
+                    }
+                }
+            };
+            xhr.onerror = function (e) {
+            console.error(xhr.statusText);
+            };
+            xhr.send(null); 
+         }
+            
+            
+        function makePurchase(){
+            var purchaseURL = 
+                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
+            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;
+            
+            doHTTP(purchaseURL, function(responseText){
+                responseText = JSON.parse(responseText);
+                
+                for(i = 0; i < responseText.length; i++){
+                    
+                   document.getElementById('pastPurchase').innerHTML += "Amount:" + '&nbsp;'+ responseText[i]['amount'] + '<br>';
+            }
+            //doHTTP("http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey, 'pastPurchase');
+            
+        });
+        }
+                   
+//            
+//sample body for purchase request
+//                    
 //                    {
 //                  "merchant_id": "Target",
 //                  "medium": "balance",
@@ -149,7 +146,7 @@
 //                  "status": "pending",
 //                  "description": "string"
 //}
-    
+//    
 
 </script>
     </body>
