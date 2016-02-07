@@ -79,11 +79,13 @@
     });
     
     function makePurchase(){
+       // var price = document.getElementById
+        var price = 8.99;
         $(function(){
         require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], 
             function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase) {
             var apikey =   'd17aecf060203fad3bb3416d6cf34f93';
-                purchaseDemo(apikey,purchase, 8.99);     
+                purchaseDemo(apikey,purchase, price);     
             });
     });
         
