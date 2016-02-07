@@ -141,13 +141,17 @@
 
             function capturePhoto(){
                 navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60});
+                
             }
             function uploadPhoto(data){
             // this is where you would send the image file to server
              
             //output image to screen
                 //console.log("wtf");
-              window.location.assign("http://www.w3schools.com");
+              var serial = "034856121237";
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", "https://www.tjhsst.edu/~2016choang/Agency/saveSerial.php?q="+serial, true);
+                xmlhttp.send();
             }
 
             
