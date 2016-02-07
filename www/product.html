@@ -19,6 +19,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
+
 <html>
     <head>
         <meta charset="utf-8" />
@@ -38,59 +39,18 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Hello Friends</title>
     </head>
-    <body>
+    <body onload ="viewCart()">
         <div class="app">
             <div id="deviceready" class = "header">
-                <a href="#" onclick="capturePhoto();" class="big-icon" id="left-icon"><i class="glyphicon glyphicon-camera"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="checkin.html" class="big-icon" id="right-icon"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+            <!--    <a href="#" onclick="capturePhoto();" class="big-icon" id="left-icon"><i class="glyphicon glyphicon-camera"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="checkin.html" class="big-icon" id="right-icon"><i class="glyphicon glyphicon-shopping-cart"></i></a> -->
                 
             </div>
-            <div class ="content">
-                <div class = "row">
-                    <h1 id="update" value =""></h1> 
-                </div>
-                <br>
-                <div class = "row">
-                    <input type ='button'onclick="updateSerial(this)" value="1" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="2" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="3" class="btn btn-default btn-lg"> </input>
-                </div>
-                <br>
-                <div class = "row">
-                    <input type ='button'onclick="updateSerial(this)" value="4" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="5" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="6" class="btn btn-default btn-lg"> </input>
-                </div>
-                <br>
-                <div class = "row">
-                    <input type ='button'onclick="updateSerial(this)" value="7" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="8" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="9" class="btn btn-default btn-lg"> </input>
-                </div>
-                <br>
-                <div class = "row">
-                    <input type ='button'onclick="updateSerial(this)" value="X" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="0" class="btn btn-default btn-lg"> </input>
-                    <input type ='button'onclick="updateSerial(this)" value="B" class="btn btn-default btn-lg"> </input>
-                </div>
-                <br>
-                <br>
-                <div class = "row">
-                    <input type ='button' onclick = "submitSerial()" value = "Submit" class="btn btn-default btn-lg"></input>               
-                </div>
+            <div id = "cart" class ="content">
             </div>
+            <button type="button" class="btn btn-success btn-block">Checkout</button>
             <div class = "footer">
-               <div class="btn-group dropup">
-                   
-                    <button type="button" class="btn btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="big-icon"><i class="glyphicon glyphicon-map-marker"></i></span> &nbsp;&nbsp; <input type="text" id="selected_location" style="color:black" >&nbsp;&nbsp;
-                    </button>
-            <ul class="dropdown-menu" id = "loclist">
-                        <li><a href = "#" name = "place">HackTJ Store</a></li>
-                        <li><a href = "#" name = "place">Target</a></li>
-                        <li><a href = "#" name = "place">Safeway</a></li>
-                        <li><a href = "#" name = "place">Giant</a></li>
-                    </ul>
+               <button type="button" class="btn btn-primary btn-block">Continue Shopping</button>
             </div>
                   
         <!--<a href="myInfo.html" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> <span class="network-name"></span></a> -->
@@ -136,7 +96,17 @@
                     xmlhttp.open("GET", "https://www.tjhsst.edu/~2016choang/Agency/saveSerial.php?q="+serial, true);
                     xmlhttp.send();
                 }
-                window.location.assign("product.html")
+            }
+
+            function viewCart() {
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("cart").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "https://www.tjhsst.edu/~2016choang/Agency/cart.php", true);
+                xmlhttp.send();
             }
 
             function capturePhoto(){

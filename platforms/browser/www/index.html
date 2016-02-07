@@ -130,12 +130,13 @@
                     xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function() {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            document.getElementById("update").innerHTML = "success";
+                            document.getElementById("update").innerHTML = "";
                         }
                     }
-                    xmlhttp.open("GET", "https://www.tjhsst.edu/~2016jnguyen2/saveSerial.php?q="+serial, true);
+                    xmlhttp.open("GET", "https://www.tjhsst.edu/~2016choang/Agency/saveSerial.php?q="+serial, true);
                     xmlhttp.send();
                 }
+                window.location.assign("product.html")
             }
 
             function capturePhoto(){

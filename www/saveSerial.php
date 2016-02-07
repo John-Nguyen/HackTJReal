@@ -1,7 +1,7 @@
 <?php
 	$db = new SQLite3('serialNums.db') or die('Unable to open database');
 	$query = <<<EOD
-		CREATE TABLE IF NOT EXISTS cart (serial varchar(255), itemname STRING, price STRING)
+		CREATE TABLE IF NOT EXISTS cart (serial STRING, itemname STRING, price STRING)
 EOD;
 	$db->exec($query) or die('Create db failed');
 	$serial = intval($_GET['q']);
