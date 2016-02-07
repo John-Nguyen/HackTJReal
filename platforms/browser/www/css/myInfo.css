@@ -45,6 +45,7 @@ body {
     width:100%;
 }
 
+
 /* Portrait layout (default) */
 .app {
     background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
@@ -126,18 +127,22 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+.selectedUser{
+    height:50px;
+}
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
 
-.pastPurchase{
+#pastPurchase{
     align-content: center;
+    align-items: center;
+    text-align: center;
     margin:auto;
-    margin-left: 50px;
-    color:blue;
+    size:24px;
+    color:black;
 }
  
 .blink {

@@ -13,6 +13,8 @@
         <!-- Custom Fonts -->
         <link href="Bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        
         <link rel="stylesheet" type="text/css" href="css/myInfo.css" />
         <title>My Info</title>
         <script data-main="lib/capital_one" src="lib/require-jquery.js"></script>
@@ -24,10 +26,16 @@
             </div>
             <div class = "content" align = "center">
                 <h2 id = "userName"></h2>
-                <h2 id = "userBalance">Balance:</h2>
-                <p id = "userAccount"></p>
-                <button class = "btn btn-default" onClick = makePurchase()>View Purchase History</button>
+                
+                <h1 id = "selected_user">SELECT AN ACCOUNT</h1>
                 <br>
+                <div class="btn-group" id = "chooseUsers">
+                    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" id = "users">
+                    </ul>
+                </div>
                 <div class="btn-group">
                     <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Account Type<span class="caret"></span>
@@ -36,11 +44,14 @@
                         <li><a href = "#">Checking Account</a></li>
                         <li><a href = "#">Savings Account</a></li>
                     </ul>
-                </div>
-                 <br>
-                
+                </div> 
+                <br><br><br>
+                 <h3 id = "userBalance">Balance:</h2>
+                 <h3>Purchase History</h1>
+                <br>
             </div>
-            <div id = "pastPurchase"></div>
+            <div id = "pastPurchase">
+            </div>
             <div class = "footer">
                    
             </div>
@@ -57,31 +68,55 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script>
-//            $(function(){
-//                require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase], function (account) {
-//                    var apikey = 'd17aecf060203fad3bb3416d6cf34f93';
-//                    accountDemo(apikey, account);
-//                });
-//            });
-            var myKey = "d17aecf060203fad3bb3416d6cf34f93";
-            var userData = [{"_id":"56241a14de4bf40b17112dfc","customer_id":"56241a13de4bf40b171121e5","nickname":"Katina's Account","type":"Checking","rewards":28275,"balance":40726}];
             
-            var sampleMerchant = [{"_id": "56241a13de4bf40b17112333",
-                        "address": {
-                        "street_number": "5901",
-                        "street_name": "Lafayette St.",
-                        "city": "Brooklyn",
-                        "state": "NY",
-                        "zip": "07009"
-                        },
-                        "geocode": {
-                            "lat": 33,
-                            "lng": -1
-                        },
-                                   "name": "Best Productions",
-                                    "category": "Entertainment"
-  }];
+    $(function(){
+    require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], 
+            function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase) {
+                var apikey =   'd17aecf060203fad3bb3416d6cf34f93';
+                accountDemo(apikey, account);
+                showFakePurchases(apikey);
+                
+        });
+    });
+    
+    function accountDemo (apikey, account) {
+        console.log('Account Demo');
+        var custAccount = account.initWithKey(apikey);
+			var custID = '55e94a6af8d8770528e60e64';
+			var accID = '560072e0ce1cef140015e483';
+			var newAccount = "{\"nickname\":\"Mr. Stanislaus's Account\"}";
+			var sampleAccount = "{\"balance\":50,\"nickname\":\"Lola Account\",\"rewards\":2,\"type\":\"Checking\"}";
+        
+          for(x = 0; x < custAccount.getAllAccounts().length; x++){      
+			 console.log("[Account - Get All Accounts] : Sample Account Nickname: (" + custAccount.getAllAccounts()[x].nickname + ")" + x);
+              var list = document.createElement('li');
+              var name = document.createTextNode(""+custAccount.getAllAccounts()[x].nickname);
+              
+              var link =  document.createElement('a');
+              link.appendChild(name);
+                link.setAttribute("href",'#');
+              list.appendChild(link);
+              document.getElementById('users').appendChild(list);
+              
+          }
+         $("#users li a").click(function(){
+
+           $('#selected_user').html($(this).html());
+        });
+//			//console.log("[Account - Get All By Type] : " + custAccount.getAllByType('Checking')[0].type);
+//			console.log("[Account - Get Customer (Prior Update)] : " + ((custAccount.getAllByCustomerId(custID))[0]).nickname);
+			console.log("[Account - Updating Stanislaus's Account] - response code: " + custAccount.updateAccount(accID, newAccount));
+			console.log("[Account - Get Customer (Post Update)] : " + custAccount.getAllByCustomerId(custID)[0].nickname);
+			console.log("[Account - Create Sample for Miss. Stanislaus's Account]:  response" + custAccount.createAccount(custID,        sampleAccount));
+			console.log("[Account - Get One] : Account Balance $" + parseFloat(custAccount.getAccountById(accID).balance).toFixed(2));
+			
+		} 
+    
+       
+        
+    function showFakePurchases(apikey){
             
+            var userData = [{"_id":"56241a14de4bf40b17112dfc","customer_id":"56241a13de4bf40b171121e5","nickname":"Katina's                                 Account","type":"Checking","rewards":28275,"balance":40726}];
             var userId = userData[0]['_id'];
             var userName = userData[0]['nickname'];
             var userBalance = userData[0]['balance'];
@@ -89,12 +124,23 @@
             document.getElementById('userBalance').innerHTML += userData[0]['balance'];
             
             var purchaseURL = 
-                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
+                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+apikey;
             
+            doHTTP(purchaseURL, function(responseText){
+                responseText = JSON.parse(responseText);
+                
+                for(i = 0; i < responseText.length; i++){
+                    document.getElementById('pastPurchase').innerHTML += "<tr><td> &nbsp; &nbsp; Date:</td>" + '&nbsp;<td>'+                                   responseText[i]['purchase_date'] + '</td></tr>';
+                    document.getElementById('pastPurchase').innerHTML += "<tr><td> &nbsp; &nbsp; Amount:</td>" + '&nbsp;<td>'+                                 responseText[i]['amount'] + '</td></tr>';
+                    document.getElementById('pastPurchase').innerHTML += "<tr><td> &nbsp; &nbsp; Merchant:</td>" + '&nbsp;<td>'+                               responseText[i]['merchant'] + '</td></tr>';
+                    
+                    document.getElementById('pastPurchase').innerHTML +='<br>';
+                    
+                }
+                document.getElementById('pastPurchase').innerHTML += "</table>";
             
-            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;//"http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey;
-            //doHTTP(purchaseURL, 'pastPurchase');
-            
+            });
+        }
             
             function doHTTP(theURL, callback){
                 var xhr = new XMLHttpRequest();
@@ -117,36 +163,9 @@
             xhr.send(null); 
          }
             
+
             
-        function makePurchase(){
-            var purchaseURL = 
-                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
-            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;
-            
-            doHTTP(purchaseURL, function(responseText){
-                responseText = JSON.parse(responseText);
-                
-                for(i = 0; i < responseText.length; i++){
-                    
-                   document.getElementById('pastPurchase').innerHTML += "Amount:" + '&nbsp;'+ responseText[i]['amount'] + '<br>';
-            }
-            //doHTTP("http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey, 'pastPurchase');
-            
-        });
-        }
-                   
-//            
-//sample body for purchase request
-//                    
-//                    {
-//                  "merchant_id": "Target",
-//                  "medium": "balance",
-//                  "purchase_date": "2016-02-07",
-//                  "amount": 25,
-//                  "status": "pending",
-//                  "description": "string"
-//}
-//    
+
 
 </script>
     </body>
