@@ -4,7 +4,7 @@
 		CREATE TABLE IF NOT EXISTS cart (serial STRING, itemname STRING, price STRING)
 EOD;
 	$db->exec($query) or die('Create db failed');
-	$serial = intval($_GET['q']);
+	$serial = $_GET['q'];
 	$db2 = new SQLite3('mainData.db') or die('Unable to open database');
 	$result2 = $db2->query('SELECT * FROM data') or die('Query failed');
 	while($row2 = $result2->fetchArray())
@@ -17,6 +17,9 @@ EOD;
 			INSERT INTO cart VALUES ( '$serial', '$name', '$price')
 EOD;
 			$db->exec($query2) or die("Unable to add cart $serial");
+			$fat = $serial;
+			$db2->exec('DELETE FROM data WHERE serial='.$serial.'');
+			break;
 		}
 	}
 	$result = $db->query('SELECT * FROM cart') or die('Query failed');
