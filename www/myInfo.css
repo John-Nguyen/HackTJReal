@@ -39,8 +39,8 @@ body {
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
     height:100%;
-    margin:0px;
-    padding:0px;
+    margin:  20px 30px 30px 20px;
+    padding: 20px 30px 30px 20px;
     text-transform:uppercase;
     width:100%;
 }
@@ -53,8 +53,8 @@ body {
                     /* text area height */
     width:100%;                   /* text area width */
     text-align:center;
-    padding: 20px 20px 20px 20px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin: auto; /* offset vertical: half of image height and text area height */
+    padding:0px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin: 100px 150px 100px 80px ; /* offset vertical: half of image height and text area height */
                                    /* offset horizontal: half of text area width */
 }
 
@@ -76,61 +76,18 @@ h1 {
     padding:0px;
     text-align:center;
 }
-.content{
-    align-content: center;
-    margin-top: 175px;
-    width: 100%;
-    position: fixed;
-    right: 0;
-    left: 0;
 
-
-
-}
-.header{
-    position: fixed;
-    right: 0;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    margin-top: 20px;
-    color: white;
-    background-color:white;
-    align-content: center;
-    font-style:bold;
-    width: 100%; 
-    background-image: none;
-    border-width: 2px;
-    border-top-width:2px;
-    border-top-color:gray;
-    border-top-style: solid;
-    background-repeat: repeat;
-    background-attachment: scroll;
-    background-position: 0% 0%;
-    position: fixed;
-    right: 0pt;
-    left: 0pt;
-}
 .footer{
     position: fixed;
     right: 0;
-    bottom: ;
+    bottom: 0;
     left: 0;
-<<<<<<< Updated upstream
-    padding: 10px;
+    padding: 1rem;
     color: white;
     background-color:white;
     align-content: center;
     font-style:bold;
-=======
-    margin-bottom: :100px 150px 100px 80px;
-    padding: 1rem;
-    color: blue;
-    background-color:white;
-    align-content: center;
-    font-style:bold;
-    height:100px; 
->>>>>>> Stashed changes
+    height:24px; 
     width: 100%; 
     background-image: none;
     border-width: 2px;
