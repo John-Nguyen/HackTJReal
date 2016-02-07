@@ -55,6 +55,7 @@ body {
 }
 
 .title-header {
+    text-align: center;
     font-size:24px;
     font-weight:normal;
     margin:0px;
@@ -130,6 +131,36 @@ body {
     border-top-width:2px;
     border-top-color:gray;
     border-top-style: solid;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+}
+
+#noborder{
+    position: fixed;
+    right: 0;
+    bottom: ;
+    left: 0;
+
+    padding: 10px;
+    color: white;
+    background-color:white;
+    align-content: center;
+    font-style:bold;
+
+    margin-bottom: :100px 150px 100px 80px;
+    padding: 1rem;
+    color: blue;
+    background-color:white;
+    align-content: center;
+    font-style:bold;
+    height:10px; 
+
+    width: 100%; 
+    background-image: none;
     background-repeat: repeat;
     background-attachment: scroll;
     background-position: 0% 0%;
