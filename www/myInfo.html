@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/myInfo.css" />
         <title>My Info</title>
+        <script data-main="lib/capital_one" src="lib/require-jquery.js"></script>
     </head>
     <body>
         <div class="app">
@@ -59,78 +60,84 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="Bootstrap/js/bootstrap.min.js"></script>
         <script>
-            var myKey = "d17aecf060203fad3bb3416d6cf34f93";
-            var userData = [{"_id":"56241a14de4bf40b17112dfc","customer_id":"56241a13de4bf40b171121e5","nickname":"Katina's Account","type":"Checking","rewards":28275,"balance":40726}];
-            
-            var sampleMerchant = [{"_id": "56241a13de4bf40b17112333",
-                        "address": {
-                        "street_number": "5901",
-                        "street_name": "Lafayette St.",
-                        "city": "Brooklyn",
-                        "state": "NY",
-                        "zip": "07009"
-                        },
-                        "geocode": {
-                            "lat": 33,
-                            "lng": -1
-                        },
-                                   "name": "Best Productions",
-                                    "category": "Entertainment"
-  }];
-            
-            var userId = userData[0]['_id'];
-            var userName = userData[0]['nickname'];
-            var userBalance = userData[0]['balance'];
-            document.getElementById('userName').innerHTML += ", " + userData[0]['nickname'];
-            document.getElementById('userBalance').innerHTML += userData[0]['balance'];
-            
-            var purchaseURL = 
-                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
-            
-            
-            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;//"http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey;
-            //doHTTP(purchaseURL, 'pastPurchase');
-            
-            
-            function doHTTP(theURL, callback){
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", theURL, true);
-                xhr.onreadystatechange = function (e) {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        console.log(xhr.responseText);
-                        callback(xhr.responseText);
-                    } 
-                    else {
-                        console.error(xhr.statusText);
-                    
-                    }
-                }
-            };
-            xhr.onerror = function (e) {
-            console.error(xhr.statusText);
-            };
-            xhr.send(null); 
-         }
-            
-            
-        function makePurchase(){
-            var purchaseURL = 
-                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
-            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;
-            
-            doHTTP(purchaseURL, function(responseText){
-                responseText = JSON.parse(responseText);
-                
-                for(i = 0; i < responseText.length; i++){
-                    
-                   document.getElementById('pastPurchase').innerHTML += "Amount:" + '&nbsp;'+ responseText[i]['amount'] + '<br>';
-            }
-            //doHTTP("http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey, 'pastPurchase');
-            
-        });
-        }
-                   
+            $(function(){
+                require(['account', 'atm', 'branch', 'customer', 'deposit', 'withdrawal', 'bills', 'merchant', 'purchase'], function (account, atm, branch, customer, deposit, withdrawal, bills, merchant, purchase], function (account) {
+                    var apikey = 'd17aecf060203fad3bb3416d6cf34f93';
+                    accountDemo(apikey, account);
+                });
+            });
+//            var myKey = "d17aecf060203fad3bb3416d6cf34f93";
+//            var userData = [{"_id":"56241a14de4bf40b17112dfc","customer_id":"56241a13de4bf40b171121e5","nickname":"Katina's Account","type":"Checking","rewards":28275,"balance":40726}];
+//            
+//            var sampleMerchant = [{"_id": "56241a13de4bf40b17112333",
+//                        "address": {
+//                        "street_number": "5901",
+//                        "street_name": "Lafayette St.",
+//                        "city": "Brooklyn",
+//                        "state": "NY",
+//                        "zip": "07009"
+//                        },
+//                        "geocode": {
+//                            "lat": 33,
+//                            "lng": -1
+//                        },
+//                                   "name": "Best Productions",
+//                                    "category": "Entertainment"
+//  }];
+//            
+//            var userId = userData[0]['_id'];
+//            var userName = userData[0]['nickname'];
+//            var userBalance = userData[0]['balance'];
+//            document.getElementById('userName').innerHTML += ", " + userData[0]['nickname'];
+//            document.getElementById('userBalance').innerHTML += userData[0]['balance'];
+//            
+//            var purchaseURL = 
+//                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
+//            
+//            
+//            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;//"http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey;
+//            //doHTTP(purchaseURL, 'pastPurchase');
+//            
+//            
+//            function doHTTP(theURL, callback){
+//                var xhr = new XMLHttpRequest();
+//                xhr.open("GET", theURL, true);
+//                xhr.onreadystatechange = function (e) {
+//                if (xhr.readyState === 4) {
+//                    if (xhr.status === 200) {
+//                        console.log(xhr.responseText);
+//                        callback(xhr.responseText);
+//                    } 
+//                    else {
+//                        console.error(xhr.statusText);
+//                    
+//                    }
+//                }
+//            };
+//            xhr.onerror = function (e) {
+//            console.error(xhr.statusText);
+//            };
+//            xhr.send(null); 
+//         }
+//            
+//            
+//        function makePurchase(){
+//            var purchaseURL = 
+//                "http://api.reimaginebanking.com/accounts/"+userId+"/purchases?key="+myKey;
+//            var theURL = "http://api.reimaginebanking.com/accounts/56241a14de4bf40b17112dfc/purchases?key=" + myKey;
+//            
+//            doHTTP(purchaseURL, function(responseText){
+//                responseText = JSON.parse(responseText);
+//                
+//                for(i = 0; i < responseText.length; i++){
+//                    
+//                   document.getElementById('pastPurchase').innerHTML += "Amount:" + '&nbsp;'+ responseText[i]['amount'] + '<br>';
+//            }
+//            //doHTTP("http://api.reimaginebanking.com/accounts?type=Checking&key=" + myKey, 'pastPurchase');
+//            
+//        });
+//        }
+//                   
             
 //sample body for purchase request
                     
